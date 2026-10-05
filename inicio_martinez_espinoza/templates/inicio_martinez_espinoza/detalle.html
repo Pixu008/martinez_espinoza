@@ -1,0 +1,41 @@
+{% extends 'inicio_martinez_espinoza/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        
+        <!-- Botón para volver atrás -->
+        <div class="mb-3">
+            <a href="{% url 'inicio:index' %}" class="btn btn-outline-secondary btn-sm">
+                &larr; Volver al inicio
+            </a>
+        </div>
+
+        <div class="card shadow border-0 p-4">
+            <h2 class="fw-bold text-primary mb-3">{{ tema.nombre }}</h2>
+            <p class="text-secondary mb-4">{{ tema.descripcion }}</p>
+
+            <!-- Carrusel de Bootstrap con las 2 imágenes del tema -->
+            <div id="carouselDetalle" class="carousel slide shadow-sm rounded overflow-hidden" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    {% for img in tema.imagenes %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <img src="{% static img %}" class="d-block w-100 object-fit-cover" style="height: 400px;" alt="{{ tema.nombre }}">
+                    </div>
+                    {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselDetalle" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselDetalle" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                </button>
+            </div>
+            
+        </div>
+    </div>
+</div>
+{% endblock %}

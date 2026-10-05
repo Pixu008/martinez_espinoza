@@ -2,41 +2,27 @@
 {% load static %}
 
 {% block content %}
-<div class="row text-center mb-4">
+<div class="row text-center mb-5">
     <div class="col">
         <h1 class="fw-bold">Temas Principales del Proyecto</h1>
-        <p class="text-muted">Explora las áreas tecnológicas de ciberseguridad y desarrollo web.</p>
+        <p class="text-muted">Selecciona un tema para ver sus detalles e imágenes exclusivas.</p>
     </div>
 </div>
 
 <div class="row g-4 justify-content-center">
     {% for tema in temas %}
-    <div class="col-md-6">
+    <div class="col-md-5">
         <div class="card h-100 shadow-sm border-0">
-            
-            <!-- Carrusel de Bootstrap para las imágenes -->
-            <div id="carouselTema{{ tema.id }}" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    {% for img in tema.imagenes %}
-                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                        <img src="{% static img %}" class="d-block w-100 object-fit-cover" style="height: 250px;" alt="{{ tema.nombre }}">
-                    </div>
-                    {% endfor %}
+            <div class="card-body d-flex flex-column text-center p-4">
+                <h3 class="card-title h4 fw-bold text-primary mb-3">{{ tema.nombre }}</h3>
+                <p class="card-text text-secondary mb-4">{{ tema.descripcion }}</p>
+                
+                <!-- Botón que redirige a la vista de detalle del tema -->
+                <div class="mt-auto">
+                    <a href="{% url 'inicio:detalle' tema.id %}" class="btn btn-dark w-100 py-2">
+                        Ver imágenes y detalles
+                    </a>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselTema{{ tema.id }}" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Anterior</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselTema{{ tema.id }}" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Siguiente</span>
-                </button>
-            </div>
-
-            <!-- Contenido de la Card -->
-            <div class="card-body d-flex flex-column">
-                <h3 class="card-title h5 fw-bold text-primary">{{ tema.nombre }}</h3>
-                <p class="card-text text-secondary">{{ tema.descripcion }}</p>
             </div>
         </div>
     </div>
